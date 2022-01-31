@@ -5,10 +5,8 @@ class AuthorizeApiRequest
     @headers = headers
   end
 
-  def call
-    {
-      user: user
-    }
+  def current_user
+    user
   end
 
   private

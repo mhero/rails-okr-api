@@ -7,15 +7,14 @@ class AuthenticateUser
   end
 
   def call
-    user = authenticate_user
-    JsonWebToken.encode(user_id: user.id) if user
+    JsonWebToken.encode(user_id: authenticated_user.id)
   end
 
   private
 
   attr_reader :username, :password
 
-  def authenticate_user
+  def authenticated_user
     user = User.find_by(username: username)
     return user if user&.authenticate(password)
 
