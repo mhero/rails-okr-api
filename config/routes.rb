@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :goals, only: [:index, :create] do
     resources :key_results, only: [:create]
   end
+
+  post 'authenticate', to: 'authentication#authenticate'
 end

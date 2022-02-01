@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class AuthenticateUser
-  def initialize(username, password)
+  prepend SimpleCommand
+
+  def initialize(username:, password:)
     @username = username
     @password = password
   end
 
-  def token
+  def call
     JsonWebToken.encode(user_id: authenticated_user.id)
   end
 

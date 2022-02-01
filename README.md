@@ -81,3 +81,7 @@ rails server --binding 0.0.0.0 --port 4567
 ```
 bundle exec sidekiq
 ``` 
+
+## Request example
+
+token=$(curl -d '{"username":"marco", "password":"password"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')

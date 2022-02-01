@@ -234,6 +234,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    simple_command (0.1.0)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -265,6 +266,7 @@ DEPENDENCIES
   rubocop-rails
   shoulda-matchers
   sidekiq
+  simple_command
   tzinfo-data
 
 RUBY VERSION

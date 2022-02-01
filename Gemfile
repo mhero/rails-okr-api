@@ -36,6 +36,7 @@ gem "bootsnap", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "jsonapi-rails"
 gem "jwt"
+gem 'simple_command'
 gem "kaminari"
 gem "sidekiq"
 
