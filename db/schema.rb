@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_01_31_173712) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "goals", force: :cascade do |t|
     t.string "title", limit: 180, null: false
     t.datetime "start_date", precision: 6
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 2022_01_31_173712) do
     t.string "title", limit: 180, null: false
     t.datetime "started_at", precision: 6
     t.datetime "completed_at", precision: 6
-    t.integer "goal_id", null: false
+    t.bigint "goal_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["goal_id"], name: "index_key_results_on_goal_id"
