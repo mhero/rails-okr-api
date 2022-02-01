@@ -72,6 +72,12 @@ rails db:create
 rails db:migrate
 ```
 
+you can also seed data:
+
+```
+rails db:seed
+```
+
 9. run backend (on aterminal window)
 ```
 rails server --binding 0.0.0.0 --port 4567
@@ -90,14 +96,18 @@ brew install jq
 
 then:
 
+```bash
 token=$(curl -d '{"username":"cruella", "password":"letmein1"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
+```
 
-
+```bash
 curl --location --request GET 'http://localhost:3000/goals?page=1' \
 --header "Authorization: $token" \
 --header "Content-Type: application/json"
+```
 
 
+```bash
 curl --location --request POST 'http://localhost:3000/goals/1/key_results' \
 --header 'Content-Type: application/json' \
 --header "Authorization: $token" \
@@ -106,3 +116,4 @@ curl --location --request POST 'http://localhost:3000/goals/1/key_results' \
         "title": "Test"
     }
 }'
+```
