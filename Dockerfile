@@ -14,3 +14,4 @@ ADD Gemfile.tip $APP_HOME/
 RUN bundle install
 
 ADD . $APP_HOME
+RUN rm -rf $APP_HOME/tmp
