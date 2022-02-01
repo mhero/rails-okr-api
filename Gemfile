@@ -35,6 +35,8 @@ gem "bootsnap", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "jsonapi-rails"
 gem "jwt"
+gem "kaminari"
+gem "sidekiq"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -57,5 +59,6 @@ group :development do
 end
 
 group :test do
+  gem "rspec-sidekiq"
   gem "shoulda-matchers"
 end

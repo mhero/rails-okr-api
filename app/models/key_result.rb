@@ -8,6 +8,8 @@ class KeyResult < ApplicationRecord
 
   belongs_to :goal
 
+  after_commit :update_goal_progress, on: %i[create update]
+
   def status
     if in_progress?
       :in_progress
@@ -24,5 +26,12 @@ class KeyResult < ApplicationRecord
 
   def completed?
     completed_at.present?
+  end
+
+  private
+
+  def update_goal_progress
+    return unless saved_change_to_attribute?(:completed_at) || saved_change_to_attribute?(:created_at)
+    UpdateGoalProgressWorker.perform_async(goal_id)
   end
 end

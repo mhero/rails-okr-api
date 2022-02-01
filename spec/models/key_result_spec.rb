@@ -69,4 +69,52 @@ RSpec.describe KeyResult, type: :model do
       it { expect(kr.status).to eq :completed }
     end
   end
+
+  describe "callbacks" do
+    describe "update_goal_progress" do
+      context "when a new key result is added" do
+        it "enqueues a job" do
+          create(:key_result)
+          expect(UpdateGoalProgressWorker.jobs.size).to eq(1)
+        end
+      end
+
+      context "when a key result is completed" do
+        it "enqueues a job" do
+          kr = create(:key_result)
+          kr.update(completed_at: DateTime.now)
+
+          expect(UpdateGoalProgressWorker.jobs.size).to eq(2)
+        end
+      end
+
+      context "when a key result completed_at date is removed" do
+        it "enqueues a job" do
+          kr = create(:key_result, :completed)
+          kr.update(completed_at: nil)
+
+          expect(UpdateGoalProgressWorker.jobs.size).to eq(2)
+        end
+      end
+
+      context "when other field is udpated" do
+        it "does not enqueue a job" do
+          kr = create(:key_result)
+          kr.update(completed_at: DateTime.now)
+          kr.update(title: "lol")
+
+          expect(UpdateGoalProgressWorker.jobs.size).to eq(2)
+        end
+      end
+
+      context "when other field is udpated" do
+        it "does not enqueue a job" do
+          kr = create(:key_result)
+          kr.update(title: "lol")
+
+          expect(UpdateGoalProgressWorker.jobs.size).to eq(1)
+        end
+      end
+    end
+  end
 end
