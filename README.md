@@ -66,12 +66,18 @@ database.yml
 bundle install
 ```
 
-8. run backend (on aterminal window)
+8. Setup db:
+```
+rails db:create
+rails db:migrate
+```
+
+9. run backend (on aterminal window)
 ```
 rails server --binding 0.0.0.0 --port 4567
 ```
 
-9. run sidekiq (on aterminal window)
+10. run sidekiq (on aterminal window)
 ```
 bundle exec sidekiq
 ``` 
