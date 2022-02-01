@@ -6,12 +6,12 @@ RSpec.describe AuthenticateUser do
   # create test user
   let!(:user) { create(:user, password: "hola") }
 
-  describe "#call" do
+  describe "#token" do
     context "when valid credentials" do
       subject { described_class.new(user.username, "hola") }
 
       it "returns an auth token" do
-        token = subject.call
+        token = subject.token
         expect(token).not_to be_nil
       end
     end
@@ -20,7 +20,7 @@ RSpec.describe AuthenticateUser do
       subject { described_class.new("foo", "bar") }
 
       it "raises an authentication error" do
-        expect { subject.call }
+        expect { subject.token }
           .to raise_error(
             ExceptionHandler::AuthenticationError,
             /Invalid credentials/

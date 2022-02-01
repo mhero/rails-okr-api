@@ -6,7 +6,7 @@ class AuthenticateUser
     @password = password
   end
 
-  def call
+  def token
     JsonWebToken.encode(user_id: authenticated_user.id)
   end
 
