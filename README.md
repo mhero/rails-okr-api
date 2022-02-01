@@ -28,7 +28,7 @@ docker-compose up
 
 6. Rails debug
 ```
-docker exec -it $( docker ps | grep ruby-okr-api | awk "{print \$1}" | head -n 1 ) rails c
+docker exec -it $( docker ps | grep rails-okr-api | awk "{print \$1}" | head -n 1 ) rails c
 ```
 
 ## Full install
@@ -90,9 +90,19 @@ brew install jq
 
 then:
 
-token=$(curl -d '{"username":"marco", "password":"password"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
+token=$(curl -d '{"username":"cruella", "password":"letmein1"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
 
 
 curl --location --request GET 'http://localhost:3000/goals?page=1' \
 --header "Authorization: $token" \
 --header "Content-Type: application/json"
+
+
+curl --location --request POST 'http://localhost:3000/goals/1/key_results' \
+--header 'Content-Type: application/json' \
+--header "Authorization: $token" \
+--data-raw '{
+    "key_result": {
+        "title": "Test"
+    }
+}'
