@@ -81,7 +81,18 @@ rails server --binding 0.0.0.0 --port 4567
 ```
 bundle exec sidekiq
 ``` 
-
 ## Request example
 
+Before run:
+```
+brew install jq
+```
+
+then:
+
 token=$(curl -d '{"username":"marco", "password":"password"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
+
+
+curl --location --request GET 'http://localhost:3000/goals?page=1' \
+--header "Authorization: $token" \
+--header "Content-Type: application/json"
