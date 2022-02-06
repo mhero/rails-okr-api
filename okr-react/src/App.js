@@ -104,11 +104,11 @@ class App extends Component {
       itemType === FOLDER_ID
         ? {
             id: `root-${Date.now()}`,
-            module: `New ${itemType}`,
+            title: `New ${itemType}`,
             children: [],
             collapsed: false,
           }
-        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}` };
+        : { id: `${Date.now()}`, leaf: true, title: `New ${itemType}` };
     return item;
   };
 
@@ -165,7 +165,7 @@ class App extends Component {
         holdToDisplay={-1}
         onItemClick={this.handleContextClick}
       >
-        {renderFileFolderToolbar(isFolder, node.module)}
+        {renderFileFolderToolbar(isFolder, node.title)}
       </ContextMenuTrigger>
     );
   };
@@ -178,13 +178,13 @@ class App extends Component {
         const renameObj = _.findDeep(tree, (item) => item.id === id, {
           childrenPath: CHILDREN_ID,
         });
-        const response = prompt("Please rename", renameObj.value.module);
+        const response = prompt("Please rename", renameObj.value.title);
 
         if (response === "") {
           // ignore empty string
           return;
         }
-        renameObj.value.module = response;
+        renameObj.value.title = response;
         this.setState(
           _.mapDeep(
             tree,
