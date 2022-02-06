@@ -112,7 +112,7 @@ class App extends Component {
     const { tree } = this.state;
     const newItem = this.newItem(itemType);
 
-    const newTree = _.mapDeep(tree, (item, key, parentValue) => {
+    const newTree = _.mapDeep(tree, (item) => {
       const cloneItem = Object.assign({}, item);
       if (cloneItem) {
         if (cloneItem.id === active.id && cloneItem.children) {
