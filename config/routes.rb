@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :goals, only: [:index, :create] do
+    post :batch, on: :collection
     resources :key_results, only: [:create]
   end
 

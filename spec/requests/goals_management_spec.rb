@@ -74,4 +74,54 @@ RSpec.describe "Goal management", type: :request do
       end
     end
   end
+
+  describe "POST /goals/batch" do
+    describe "with valid params" do
+      let(:request_params) do
+        {
+          goals: [
+            { title: "Goal 1" },
+            { 
+              title: "Goal 2", 
+              key_results_attributes: [
+                { title: "Key 1"},
+                { title: "Key 2"}
+              ]
+            },
+            { title: "Goal 3" }
+          ]
+
+        }.to_json
+      end
+
+      it "returns status code 201" do
+        post "/goals/batch", params: request_params, headers: headers
+
+        aggregate_failures do
+          expect(response).to have_http_status(:created)
+          expect(JSON.parse(response.body)["data"].size).to eq 3
+          expect(KeyResult.count).to eq 2
+        end
+      end
+    end
+
+    describe "when one of the goals is invalid" do
+      let(:request_params) do
+        {
+          goals: [
+            { title: "Goal 1" },
+            { title: "" },
+            { title: "Goal 3" }
+          ]
+
+        }.to_json
+      end
+
+      it "returns successfully created goals" do
+        post "/goals/batch", params: request_params, headers: headers
+
+        expect(response).to have_http_status(:created)
+      end
+    end
+  end
 end
