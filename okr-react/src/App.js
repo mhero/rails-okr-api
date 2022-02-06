@@ -23,6 +23,10 @@ import "./react-contextmenu.css";
 // add deepdash to lodash
 deepdash(_);
 
+const FOLDER_ID = "folder";
+const FILE_ID = "file";
+const CHILDREN_ID = "children";
+
 const LightScrollbar = styled.div`
   width: 10px;
   background-color: #fff;
@@ -97,7 +101,7 @@ class App extends Component {
 
   newItem = (itemType) => {
     const item =
-      itemType === "folder"
+      itemType === FOLDER_ID
         ? {
             id: `root-${Date.now()}`,
             module: `New ${itemType}`,
@@ -138,12 +142,12 @@ class App extends Component {
               <Icon
                 title="New OKR"
                 icon={folderPlus}
-                onClick={() => this.addItem("folder", node)}
+                onClick={() => this.addItem(FOLDER_ID, node)}
               />
               <Icon
                 title="New Goal"
                 icon={filePlus}
-                onClick={() => this.addItem("file", node)}
+                onClick={() => this.addItem(FILE_ID, node)}
               />
             </Fragment>
           )}
@@ -151,7 +155,7 @@ class App extends Component {
       </Toolbar>
     );
 
-    const isFolder = node.hasOwnProperty("children");
+    const isFolder = node.hasOwnProperty(CHILDREN_ID);
     return (
       <ContextMenuTrigger
         id="FILE_CONTEXT_MENU"
@@ -172,7 +176,7 @@ class App extends Component {
     switch (action) {
       case "rename":
         const renameObj = _.findDeep(tree, (item) => item.id === id, {
-          childrenPath: "children",
+          childrenPath: CHILDREN_ID,
         });
         const response = prompt("Please rename", renameObj.value.module);
 
@@ -191,7 +195,7 @@ class App extends Component {
                     ...renameObj.value,
                   }
                 : item,
-            { childrenPath: "children" }
+            { childrenPath: CHILDREN_ID }
           )
         );
         break;
