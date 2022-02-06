@@ -95,9 +95,8 @@ class App extends Component {
     [tree].some(getNode);
   };
 
-  addItem = (itemType, active) => {
-    const { tree } = this.state;
-    const newItem =
+  newItem = (itemType) => {
+    const item =
       itemType === "folder"
         ? {
             id: `root-${Date.now()}`,
@@ -106,12 +105,17 @@ class App extends Component {
             collapsed: false,
           }
         : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}` };
+    return item;
+  };
+
+  addItem = (itemType, active) => {
+    const { tree } = this.state;
+    const newItem = this.newItem(itemType);
 
     const newTree = _.mapDeep(tree, (item, key, parentValue) => {
       const cloneItem = Object.assign({}, item);
       if (cloneItem) {
         if (cloneItem.id === active.id && cloneItem.children) {
-          // folder
           cloneItem.children.push(newItem);
         }
       }
