@@ -8,9 +8,7 @@ ruby "3.1.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.1"
 
-# Use sqlite3 as the database for Active Record
-
-gem 'pg'
+gem "pg"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -36,9 +34,9 @@ gem "bootsnap", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "jsonapi-rails"
 gem "jwt"
-gem 'simple_command'
 gem "kaminari"
 gem "sidekiq"
+gem "simple_command"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

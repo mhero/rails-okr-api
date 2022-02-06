@@ -30,8 +30,11 @@ class KeyResult < ApplicationRecord
 
   private
 
+  def new_record_or_completed_at_changed?
+    saved_change_to_attribute?(:created_at) || saved_change_to_attribute?(:completed_at)
+  end
+
   def update_goal_progress
-    return unless saved_change_to_attribute?(:completed_at) || saved_change_to_attribute?(:created_at)
-    UpdateGoalProgressWorker.perform_async(goal_id)
+    UpdateGoalProgressWorker.perform_async(goal_id) if new_record_or_completed_at_changed?
   end
 end

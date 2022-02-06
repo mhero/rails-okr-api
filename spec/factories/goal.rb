@@ -5,7 +5,7 @@ FactoryBot.define do
     association :owner, factory: :user
 
     title { Faker::Lorem.sentence }
-    start_date { DateTime.now }
-    end_date { DateTime.now + 1.month }
+    started_at { DateTime.now }
+    ended_at { DateTime.now + 1.month }
   end
 end

@@ -5,7 +5,7 @@ class SerializableGoal < JSONAPI::Serializable::Resource
 
   has_many :key_results
 
-  attributes :title, :created_at, :start_date, :end_date
+  attributes :title, :created_at, :started_at, :ended_at
 
   attribute :progress do
     "#{@object.progress_percentage}%"
