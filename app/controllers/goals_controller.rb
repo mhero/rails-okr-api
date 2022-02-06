@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
         :title,
         :started_at,
         :ended_at,
-        key_results_attributes: [:title]
+        { key_results_attributes: [:title] }
       ]
     )
   end

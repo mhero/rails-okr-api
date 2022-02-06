@@ -81,11 +81,11 @@ RSpec.describe "Goal management", type: :request do
         {
           goals: [
             { title: "Goal 1" },
-            { 
-              title: "Goal 2", 
+            {
+              title: "Goal 2",
               key_results_attributes: [
-                { title: "Key 1"},
-                { title: "Key 2"}
+                { title: "Key 1" },
+                { title: "Key 2" }
               ]
             },
             { title: "Goal 3" }

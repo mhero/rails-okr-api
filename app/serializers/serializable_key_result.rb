@@ -8,5 +8,4 @@ class SerializableKeyResult < JSONAPI::Serializable::Resource
   attributes :status do
     @object.status
   end
-  
 end

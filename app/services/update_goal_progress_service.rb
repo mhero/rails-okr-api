@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateGoalProgressService
   def initialize(goal_id:)
     @goal = Goal.find(goal_id)
