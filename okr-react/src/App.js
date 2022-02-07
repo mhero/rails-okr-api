@@ -216,10 +216,13 @@ class App extends Component {
   };
 
   handleChange = (tree) => {
-    postOkrTree(tree, 1);
     this.setState({
       tree: tree,
     });
+  };
+
+  save = () => {
+    postOkrTree(this.state.tree, 1);
   };
 
   render() {
@@ -246,6 +249,7 @@ class App extends Component {
               {packageJSON.name} {packageJSON.version}
             </h1>
             <pre>{JSON.stringify(this.state.tree, null, "  ")}</pre>
+            <button onClick={this.save}>Save</button>
           </StrollableContainer>
         </div>
 
