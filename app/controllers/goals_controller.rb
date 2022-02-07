@@ -25,7 +25,6 @@ class GoalsController < ApplicationController
   end
 
   def batch
-    debugger
     goals = Goal.create(build_batch_params)
     valid_goals = goals.select(&:persisted?)
 

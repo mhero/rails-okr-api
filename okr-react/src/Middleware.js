@@ -1,8 +1,8 @@
 const axios = require("axios").default;
 
-const postOkrTree = (tree) => {
-  tree.goals = tree.children;
-  tree.owner_id = 1;
+const postOkrTree = (tree, owner_id) => {
+  tree.goals = JSON.parse(JSON.stringify(tree.children));
+  tree.owner_id = owner_id;
 
   const json = JSON.stringify(tree),
     newTree = json.replace(/"children":/g, '"key_results_attributes":');

@@ -216,7 +216,7 @@ class App extends Component {
   };
 
   handleChange = (tree) => {
-    postOkrTree(tree);
+    postOkrTree(tree, 1);
     this.setState({
       tree: tree,
     });
