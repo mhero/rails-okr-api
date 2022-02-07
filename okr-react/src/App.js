@@ -19,6 +19,7 @@ import "./styles.css";
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./theme.css";
 import "./react-contextmenu.css";
+import postOkrTree from "./Middleware";
 
 // add deepdash to lodash
 deepdash(_);
@@ -72,7 +73,6 @@ const initialState = {
   },
   collapsed: false, // start with unmodified tree
 };
-
 class App extends Component {
   state = initialState;
 
@@ -108,7 +108,11 @@ class App extends Component {
             children: [],
             collapsed: false,
           }
-        : { id: `${Date.now()}`, leaf: true, title: `New ${itemType}` };
+        : {
+            id: `${Date.now()}`,
+            leaf: true,
+            title: `New ${itemType}`,
+          };
     return item;
   };
 
@@ -156,6 +160,7 @@ class App extends Component {
     );
 
     const isFolder = node.hasOwnProperty(CHILDREN_ID);
+
     return (
       <ContextMenuTrigger
         id="FILE_CONTEXT_MENU"
@@ -181,7 +186,6 @@ class App extends Component {
         const response = prompt("Please rename", renameObj.value.title);
 
         if (response === "") {
-          // ignore empty string
           return;
         }
         renameObj.value.title = response;
@@ -210,6 +214,7 @@ class App extends Component {
   };
 
   handleChange = (tree) => {
+    postOkrTree(tree);
     this.setState({
       tree: tree,
     });
