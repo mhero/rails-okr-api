@@ -15,7 +15,6 @@ class GoalsController < ApplicationController
 
   def create
     goal = Goal.new(permitted_params)
-    goal.owner = @owner
 
     if goal.save
       render jsonapi: goal, status: :created
