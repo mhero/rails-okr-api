@@ -134,27 +134,29 @@ class App extends Component {
   };
 
   renderNode = (node) => {
-    const renderFileFolderToolbar = (isFolder, caption) => (
+    const renderFileFolderToolbar = (isFolder, caption, isRoot) => (
       <Toolbar>
         <FloatLeft>
           <Icon icon={isFolder ? folder : file} />
           {caption}
         </FloatLeft>
         <ToolbarFileFolder>
-          {isFolder && (
-            <Fragment>
+          <Fragment>
+            {isRoot && (
               <Icon
                 title="New OKR"
                 icon={folderPlus}
                 onClick={() => this.addItem(FOLDER_ID, node)}
               />
+            )}
+            {!isRoot && isFolder && (
               <Icon
                 title="New Goal"
                 icon={filePlus}
                 onClick={() => this.addItem(FILE_ID, node)}
               />
-            </Fragment>
-          )}
+            )}
+          </Fragment>
         </ToolbarFileFolder>
       </Toolbar>
     );
@@ -170,7 +172,7 @@ class App extends Component {
         holdToDisplay={-1}
         onItemClick={this.handleContextClick}
       >
-        {renderFileFolderToolbar(isFolder, node.title)}
+        {renderFileFolderToolbar(isFolder, node.title, node.id === "root-0")}
       </ContextMenuTrigger>
     );
   };
