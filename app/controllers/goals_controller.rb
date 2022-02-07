@@ -2,6 +2,7 @@
 
 class GoalsController < ApplicationController
   before_action :set_goal_owner, only: [:create]
+  skip_before_action :authorize_request, only: [:batch]
 
   def index
     goals = Goal
@@ -24,6 +25,7 @@ class GoalsController < ApplicationController
   end
 
   def batch
+    debugger
     goals = Goal.create(build_batch_params)
     valid_goals = goals.select(&:persisted?)
 
@@ -36,7 +38,7 @@ class GoalsController < ApplicationController
 
   def build_batch_params
     permitted_batch_params[:goals].map do |goal_param|
-      goal_param[:owner_id] = goal_param[:owner_id].presence || current_user.id
+      goal_param[:owner_id] = permitted_batch_params[:owner_id]
       goal_param
     end
   end
@@ -47,6 +49,7 @@ class GoalsController < ApplicationController
 
   def permitted_batch_params
     params.permit(
+      :owner_id,
       goals: [
         :title,
         :started_at,

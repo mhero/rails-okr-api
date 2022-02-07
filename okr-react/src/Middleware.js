@@ -1,20 +1,10 @@
 const axios = require("axios").default;
 
-const clone = (obj) => Object.assign({}, obj);
-
-const renameTopNode = (object, key, newKey) => {
-  const clonedObj = clone(object);
-  const targetKey = clonedObj[key];
-  delete clonedObj[key];
-  clonedObj[newKey] = targetKey;
-
-  return clonedObj;
-};
-
 const postOkrTree = (tree) => {
-  const topLevelRename = renameTopNode(tree, "children", "goals");
+  tree.goals = tree.children;
+  tree.owner_id = 1;
 
-  const json = JSON.stringify(topLevelRename),
+  const json = JSON.stringify(tree),
     newTree = json.replace(/"children":/g, '"key_results_attributes":');
 
   axios
