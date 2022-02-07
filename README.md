@@ -1,9 +1,11 @@
 ## Dependencies
 
 * Ruby 3.1.0
+* Node >= 17.4.0
 
 ## Apps info
- * Rails app runs in port 3000 (using this default config)
+ * Rails app runs in port 4567 (using this default config)
+ * React app runs in port 8084 (using this default config)
 
 ## Local Development
 ## Docker install
@@ -19,6 +21,7 @@ https://www.docker.com/products/docker-desktop
 4. Create env files for rails and react (replace variables with credentials and server variables)
 ```
 cp .env.example .env
+cp ./okr-react/.env.example ./okr-react/.env
 ```
 
 5. Run
@@ -54,6 +57,7 @@ gem install bundler && bundle config jobs 7
 5. Create env files for rails and react (replace variables with credentials and server variables)
 ```
 cp .env.example .env
+cp ./okr-react/.env.example ./okr-react/.env
 ```
 
 6. Replace file with credentials of local postgres db(in development section)
@@ -64,6 +68,7 @@ database.yml
 7. Run in command line next:
 ```
 bundle install
+cd okr-react && npm install
 ```
 
 8. Setup db:
@@ -87,6 +92,13 @@ rails server --binding 0.0.0.0 --port 4567
 ```
 bundle exec sidekiq
 ``` 
+
+11. run frontend (on a different terminal window)
+
+```
+cd okr-react && npm run dev
+```
+
 ## Request example
 
 Before run:
