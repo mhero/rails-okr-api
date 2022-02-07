@@ -35,6 +35,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "jsonapi-rails"
 gem "jwt"
 gem "kaminari"
+gem "rack-cors"
 gem "sidekiq"
 gem "simple_command"
 
