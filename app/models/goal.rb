@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: goals
+#
+#  id         :integer          not null, primary key
+#  title      :string(180)      not null
+#  started_at :datetime
+#  ended_at   :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  owner_id   :integer
+#  progress   :decimal(, )      default("0.0"), not null
+#
+
 # frozen_string_literal: true
 
 class Goal < ApplicationRecord

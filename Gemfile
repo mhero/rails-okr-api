@@ -38,6 +38,7 @@ gem "kaminari"
 gem "rack-cors"
 gem "sidekiq"
 gem "simple_command"
+gem "annotate"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
