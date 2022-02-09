@@ -89,7 +89,8 @@ RSpec.describe "Goal management", type: :request do
               ]
             },
             { title: "Goal 3" }
-          ]
+          ],
+          owner_id: current_user.id
 
         }.to_json
       end
