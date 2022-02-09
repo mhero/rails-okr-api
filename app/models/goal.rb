@@ -32,10 +32,6 @@ class Goal < ApplicationRecord
 
   private
 
-  def update_goal_progress
-    UpdateGoalProgressWorker.perform_async(id)
-  end
-
   def ended_at_is_after_started_at?
     return if ended_at.blank? || started_at.blank?
 
