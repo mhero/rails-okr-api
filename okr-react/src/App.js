@@ -1,70 +1,24 @@
 import "./App.css";
 
-import React, { Component, Fragment } from "react";
-import Tree from "react-ui-tree";
-import initialTree from "./tree";
-import packageJSON from "../package.json";
-import Icon from "react-icons-kit";
-import { folder } from "react-icons-kit/feather/folder";
-import { file } from "react-icons-kit/feather/file";
-import { folderPlus } from "react-icons-kit/feather/folderPlus";
-import { filePlus } from "react-icons-kit/feather/filePlus";
-import styled from "styled-components";
-import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import React, { Component } from "react";
+import initialTree from "./initialTree";
+import { ContextMenuTrigger } from "react-contextmenu";
 import _ from "lodash";
-import { StrollableContainer } from "react-stroller";
 import deepdash from "deepdash";
+import postOkrTree from "./request/Middleware";
+import OkrTree from "./treeComponents/OkrTree";
+import NodeToolbar from "./treeComponents/NodeToolbar";
 
 import "./styles.css";
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./theme.css";
 import "./react-contextmenu.css";
-import postOkrTree from "./Middleware";
 
 // add deepdash to lodash
 deepdash(_);
 
 const FOLDER_ID = "folder";
-const FILE_ID = "file";
 const CHILDREN_ID = "children";
-
-const LightScrollbar = styled.div`
-  width: 10px;
-  background-color: #fff;
-  opacity: 0.7;
-  border-radius: 4px;
-  margin: 10px;
-`;
-const Toolbar = styled.div`
-  position: relative;
-  display: flex;
-  color: #d8e0f0;
-  z-index: +1;
-  /*border: 1px solid white;*/
-  padding-bottom: 4px;
-  i {
-    margin-right: 5px;
-    cursor: pointer;
-  }
-  i :hover {
-    color: #d8e0f0;
-  }
-`;
-
-const FloatLeft = styled.span`
-  padding-left: 4px;
-  width: 100%;
-`;
-
-const ToolbarFileFolder = styled.div`
-  position: absolute;
-  text-align: right;
-  width: 92%;
-  color: transparent;
-  &:hover {
-    color: #d8e0f0;
-  }
-`;
 
 const initialState = {
   active: null,
@@ -135,30 +89,13 @@ class App extends Component {
 
   renderNode = (node) => {
     const renderFileFolderToolbar = (isFolder, caption, isRoot) => (
-      <Toolbar>
-        <FloatLeft>
-          <Icon icon={isFolder ? folder : file} />
-          {caption}
-        </FloatLeft>
-        <ToolbarFileFolder>
-          <Fragment>
-            {isRoot && (
-              <Icon
-                title="New OKR"
-                icon={folderPlus}
-                onClick={() => this.addItem(FOLDER_ID, node)}
-              />
-            )}
-            {!isRoot && isFolder && (
-              <Icon
-                title="New Goal"
-                icon={filePlus}
-                onClick={() => this.addItem(FILE_ID, node)}
-              />
-            )}
-          </Fragment>
-        </ToolbarFileFolder>
-      </Toolbar>
+      <NodeToolbar
+        node={node}
+        isFolder={isFolder}
+        isRoot={isRoot}
+        caption={caption}
+        addItem={this.addItem}
+      />
     );
 
     const isFolder = node.hasOwnProperty(CHILDREN_ID);
@@ -227,47 +164,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div className="tree">
-          <div style={{ marginTop: "10px" }}>
-            <StrollableContainer draggable bar={LightScrollbar}>
-              <Tree
-                paddingLeft={20}
-                tree={this.state.tree}
-                onChange={this.handleChange}
-                renderNode={this.renderNode}
-              />
-            </StrollableContainer>
-          </div>
-        </div>
-        <div
-          className="inspector"
-          style={{ overflow: "hidden", height: "100vh" }}
-        >
-          <StrollableContainer draggable>
-            <h1>
-              {packageJSON.name} {packageJSON.version}
-            </h1>
-            <pre>{JSON.stringify(this.state.tree, null, "  ")}</pre>
-            <button onClick={this.save}>Save</button>
-          </StrollableContainer>
-        </div>
-
-        <ContextMenu id="FILE_CONTEXT_MENU">
-          <MenuItem
-            data={{ action: "rename" }}
-            onClick={this.handleContextClick}
-          >
-            Rename
-          </MenuItem>
-          <MenuItem
-            data={{ action: "delete" }}
-            onClick={this.handleContextClick}
-          >
-            Delete
-          </MenuItem>
-        </ContextMenu>
-      </div>
+      <OkrTree
+        tree={this.state.tree}
+        handleChange={this.handleChange}
+        renderNode={this.renderNode}
+        save={this.save}
+        handleContextClick={this.handleContextClick}
+      />
     );
   }
 }
