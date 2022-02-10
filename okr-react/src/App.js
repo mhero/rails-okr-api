@@ -87,32 +87,26 @@ class App extends Component {
     this.setState({ ...newTree });
   };
 
-  renderNode = (node) => {
-    const renderFileFolderToolbar = (isFolder, caption, isRoot) => (
-      <NodeToolbar
-        node={node}
-        isFolder={isFolder}
-        isRoot={isRoot}
-        caption={caption}
-        addItem={this.addItem}
-      />
-    );
-
-    const isFolder = node.hasOwnProperty(CHILDREN_ID);
-
-    return (
-      <ContextMenuTrigger
-        id="FILE_CONTEXT_MENU"
-        key={node.id}
-        name={node.id}
-        collect={this.collect}
-        holdToDisplay={-1}
-        onItemClick={this.handleContextClick}
-      >
-        {renderFileFolderToolbar(isFolder, node.title, node.id === "root-0")}
-      </ContextMenuTrigger>
-    );
-  };
+  renderNode = (node) => (
+    <ContextMenuTrigger
+      id="FILE_CONTEXT_MENU"
+      key={node.id}
+      name={node.id}
+      collect={this.collect}
+      holdToDisplay={-1}
+      onItemClick={this.handleContextClick}
+    >
+      {
+        <NodeToolbar
+          node={node}
+          isFolder={node.hasOwnProperty(CHILDREN_ID)}
+          isRoot={node.id === "root-0"}
+          caption={node.title}
+          addItem={this.addItem}
+        />
+      }
+    </ContextMenuTrigger>
+  );
 
   handleContextClick = (e, { action, name: id }) => {
     const { tree } = this.state;
