@@ -45,25 +45,21 @@ services:
     volumes:
       - .:/app
     command: >
-      bash -c "chmod +x wait-for-it.sh && ./wait-for-it.sh -t 60 postgres:5432
-      && (rake db:setup || rails db:create || rake db:migrate) 
-      && rails server --binding 0.0.0.0 --port 4567"
+      bash -c "chmod +x wait-for-it.sh && ./wait-for-it.sh -t 60 postgres:5432 && (rake db:setup || rails db:create || rake db:migrate)  && rails server --binding 0.0.0.0 --port 4567"
     env_file:
       - .env
 
   frontend:
-      container_name: front
-      image: node:17-stretch-slim
-      expose:
-        - 8084
-      ports:
-        - 8084:8084
-      working_dir: /app
-      volumes:
-        - .:/app
-      command: >
-        bash -c "chmod +x wait-for-it.sh && ./wait-for-it.sh -t 200 backend:4567
-        && cd okr-react && npm install && npm run dev"
-      depends_on:
-        - backend
-
+    container_name: front
+    image: node:17-stretch-slim
+    expose:
+      - 8084
+    ports:
+      - 8084:8084
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      bash -c "chmod +x wait-for-it.sh && ./wait-for-it.sh -t 200 backend:4567 && cd okr-react && npm install --legacy-peer-deps && npm run dev"
+    depends_on:
+      - backend
