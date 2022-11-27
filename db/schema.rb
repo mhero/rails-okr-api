@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_233527) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_01_31_233527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "goals", force: :cascade do |t|
     t.string "title", limit: 180, null: false
-    t.datetime "started_at", precision: 6
-    t.datetime "ended_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "owner_id"
     t.decimal "progress", default: "0.0", null: false
     t.index ["owner_id"], name: "index_goals_on_owner_id"
@@ -28,19 +27,19 @@ ActiveRecord::Schema.define(version: 2022_01_31_233527) do
 
   create_table "key_results", force: :cascade do |t|
     t.string "title", limit: 180, null: false
-    t.datetime "started_at", precision: 6
-    t.datetime "completed_at", precision: 6
+    t.datetime "started_at"
+    t.datetime "completed_at"
     t.bigint "goal_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["goal_id"], name: "index_key_results_on_goal_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "goals", "users", column: "owner_id"
