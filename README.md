@@ -1,6 +1,6 @@
 ## Dependencies
 
-* Ruby 3.1.0
+* Ruby 3.1.2
 * Node >= 17.4.0
 
 ## Apps info
@@ -40,8 +40,8 @@ docker exec -it $( docker ps | grep rails-okr-api | awk "{print \$1}" | head -n 
 ```
 brew install node
 \curl -sSL https://get.rvm.io | bash
-rvm install "ruby-3.1.0"
-rvm use 3.1.0
+rvm install "ruby-3.1.2"
+rvm use 3.1.2
 brew install postgresql
 ```
 
