@@ -57,16 +57,16 @@ class App extends Component {
     const item =
       itemType === FOLDER_ID
         ? {
-            id: `root-${Date.now()}`,
-            title: `New ${itemType}`,
-            children: [],
-            collapsed: false,
-          }
+          id: `root-${Date.now()}`,
+          title: `New ${itemType}`,
+          children: [],
+          collapsed: false,
+        }
         : {
-            id: `${Date.now()}`,
-            leaf: true,
-            title: `New ${itemType}`,
-          };
+          id: `${Date.now()}`,
+          leaf: true,
+          title: `New ${itemType}`,
+        };
     return item;
   };
 
@@ -128,9 +128,9 @@ class App extends Component {
             (item) =>
               item.id === id
                 ? {
-                    ...item,
-                    ...renameObj.value,
-                  }
+                  ...item,
+                  ...renameObj.value,
+                }
                 : item,
             { childrenPath: CHILDREN_ID }
           )
