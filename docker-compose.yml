@@ -38,9 +38,9 @@ services:
     depends_on:
       - postgres
     expose:
-      - 3000
+      - 4567
     ports:
-      - 3000:3000
+      - 4567:4567
     working_dir: /app
     volumes:
       - .:/app
