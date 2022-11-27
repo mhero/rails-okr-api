@@ -1,4 +1,4 @@
-const axios = require("axios").default;
+import axios from 'axios';
 
 const postOkrTree = (tree, owner_id) => {
   tree.goals = JSON.parse(JSON.stringify(tree.children));
