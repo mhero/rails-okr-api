@@ -53,19 +53,23 @@ class App extends Component {
     [tree].some(getNode);
   };
 
+  newItemName = (itemType) => {
+    return itemType === FOLDER_ID ? "New Goal" : "New Key Result";
+  }
+
   newItem = (itemType) => {
     const item =
       itemType === FOLDER_ID
         ? {
           id: `root-${Date.now()}`,
-          title: `New ${itemType}`,
+          title: this.newItemName(itemType),
           children: [],
           collapsed: false,
         }
         : {
           id: `${Date.now()}`,
           leaf: true,
-          title: `New ${itemType}`,
+          title: this.newItemName(itemType),
         };
     return item;
   };
