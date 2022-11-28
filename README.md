@@ -109,7 +109,7 @@ brew install jq
 then:
 
 ```bash
-token=$(curl -d '{"username":"cruella", "password":"letmein1"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
+token=$(curl -d '{"username":"random", "password":"letmein1"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/authenticate | jq --raw-output '.auth_token')
 ```
 
 ```bash

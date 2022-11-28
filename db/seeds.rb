@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-user = User.create(username: "cruella", password: "letmein1")
+user = User.create(username: "random", password: "letmein1")
 Goal.create(title: "Run 21k in Stockholm", owner: user)
 Goal.create(title: "Visit Japan", owner: user)
 
