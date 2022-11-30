@@ -30,10 +30,6 @@ const initialState = {
 class App extends Component {
   state = initialState;
 
-  collect = (props) => {
-    return props;
-  };
-
   deleteItem = (tree, id) => {
     function getNode(node, i) {
       if (node.id === id) {
@@ -96,7 +92,7 @@ class App extends Component {
       id="FILE_CONTEXT_MENU"
       key={node.id}
       name={node.id}
-      collect={this.collect}
+      collect={() => this.props}
       holdToDisplay={-1}
       onItemClick={this.handleContextClick}
     >
