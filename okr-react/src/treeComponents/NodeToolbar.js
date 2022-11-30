@@ -46,7 +46,7 @@ const NodeToolbar = ({ node, isFolder, isRoot, caption, addItem }) => (
       <Icon icon={isFolder ? folder : file} />
       {caption}
     </FloatLeft>
-    <ToolbarFileFolder>
+    <ToolbarFileFolder id={node.id}>
       <Fragment>
         {isRoot && (
           <Icon

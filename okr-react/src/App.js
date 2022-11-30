@@ -47,6 +47,9 @@ class App extends Component {
 
     let index = -1;
     [tree].some(getNode);
+    this.setState({
+      tree: tree,
+    });
   };
 
   newItemName = (itemType) => {
@@ -108,8 +111,12 @@ class App extends Component {
     </ContextMenuTrigger>
   );
 
-  handleContextClick = (e, { action, name: id }) => {
+  handleContextClick = (e, { action, target }) => {
     const { tree } = this.state;
+    const id = target.id;
+
+    if (id == null)
+      return;
 
     switch (action) {
       case "rename":
