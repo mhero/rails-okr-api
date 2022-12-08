@@ -1,14 +1,13 @@
 import "./App.css";
 
 import React, { Component } from "react";
-import initialTree from "./initialTree";
 import { ContextMenuTrigger } from "react-contextmenu";
 import _ from "lodash";
 import deepdash from "deepdash";
 import postOkrTree from "./request/Middleware";
 import OkrTree from "./treeComponents/OkrTree";
 import NodeToolbar from "./treeComponents/NodeToolbar";
-
+import { FOLDER_ID, CHILDREN_ID, initialState } from "./treeComponents/Constants"
 import "./styles.css";
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./theme.css";
@@ -17,16 +16,7 @@ import "./react-contextmenu.css";
 // add deepdash to lodash
 deepdash(_);
 
-const FOLDER_ID = "folder";
-const CHILDREN_ID = "children";
 
-const initialState = {
-  active: null,
-  tree: {
-    ...initialTree,
-  },
-  collapsed: false, // start with unmodified tree
-};
 class App extends Component {
   state = initialState;
 
