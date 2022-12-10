@@ -37,9 +37,7 @@ class App extends Component {
 
     let index = -1;
     [tree].some(getNode);
-    this.setState({
-      tree: tree,
-    });
+    return tree;
   };
 
   newItemName = (itemType) => {
@@ -134,9 +132,9 @@ class App extends Component {
         );
         break;
       case "delete":
-        this.deleteItem(tree, id);
+        const updatedTree = this.deleteItem(tree, id);
         this.setState({
-          tree,
+          tree: updatedTree,
         });
         break;
       default:
