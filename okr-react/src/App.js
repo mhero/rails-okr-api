@@ -78,6 +78,30 @@ class App extends Component {
     this.setState({ ...newTree });
   };
 
+  renameItem = (tree, id) => {
+    const renamable = _.findDeep(tree, (item) => item.id === id, {
+      childrenPath: CHILDREN_ID,
+    });
+    const response = prompt("Please rename", renamable.value.title);
+
+    if (response === "") {
+      return;
+    }
+    renamable.value.title = response;
+
+    return _.mapDeep(
+      tree,
+      (item) =>
+        item.id === id
+          ? {
+            ...item,
+            ...renamable.value,
+          }
+          : item,
+      { childrenPath: CHILDREN_ID }
+    )
+  }
+
   renderNode = (node) => (
     <ContextMenuTrigger
       id="FILE_CONTEXT_MENU"
@@ -108,33 +132,15 @@ class App extends Component {
 
     switch (action) {
       case "rename":
-        const renameObj = _.findDeep(tree, (item) => item.id === id, {
-          childrenPath: CHILDREN_ID,
-        });
-        const response = prompt("Please rename", renameObj.value.title);
-
-        if (response === "") {
-          return;
-        }
-        renameObj.value.title = response;
+        const renammedTree = this.renameItem(tree, id);
         this.setState(
-          _.mapDeep(
-            tree,
-            (item) =>
-              item.id === id
-                ? {
-                  ...item,
-                  ...renameObj.value,
-                }
-                : item,
-            { childrenPath: CHILDREN_ID }
-          )
+          renammedTree,
         );
         break;
       case "delete":
-        const updatedTree = this.deleteItem(tree, id);
+        const deletedTree = this.deleteItem(tree, id);
         this.setState({
-          tree: updatedTree,
+          tree: deletedTree,
         });
         break;
       default:
