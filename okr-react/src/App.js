@@ -7,7 +7,7 @@ import deepdash from "deepdash";
 import postOkrTree from "./request/Middleware";
 import OkrTree from "./treeComponents/OkrTree";
 import NodeToolbar from "./treeComponents/NodeToolbar";
-import { FOLDER_ID, CHILDREN_ID, INITIAL_TREE_STATE } from "./treeComponents/Constants"
+import { FOLDER_ID, CHILDREN_ID, ROOT_ID, INITIAL_TREE_STATE } from "./treeComponents/Constants"
 import "./styles.css";
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./theme.css";
@@ -115,7 +115,7 @@ class App extends Component {
         <NodeToolbar
           node={node}
           isFolder={node.hasOwnProperty(CHILDREN_ID)}
-          isRoot={node.id === "root-0"}
+          isRoot={node.id === ROOT_ID}
           caption={node.title}
           addItem={this.addItem}
         />
