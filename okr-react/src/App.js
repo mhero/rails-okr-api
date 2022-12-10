@@ -7,7 +7,7 @@ import deepdash from "deepdash";
 import postOkrTree from "./request/Middleware";
 import OkrTree from "./treeComponents/OkrTree";
 import NodeToolbar from "./treeComponents/NodeToolbar";
-import { FOLDER_ID, CHILDREN_ID, initialState } from "./treeComponents/Constants"
+import { FOLDER_ID, CHILDREN_ID, INITIAL_TREE_STATE } from "./treeComponents/Constants"
 import "./styles.css";
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./theme.css";
@@ -18,7 +18,7 @@ deepdash(_);
 
 
 class App extends Component {
-  state = initialState;
+  state = INITIAL_TREE_STATE;
 
   deleteItem = (tree, id) => {
     function getNode(node, i) {
@@ -125,7 +125,7 @@ class App extends Component {
 
   handleContextClick = (e, { action, target }) => {
     const { tree } = this.state;
-    const id = target.id;
+    const id = target.id || target.parentElement.children[1].id;
 
     if (id == null)
       return;

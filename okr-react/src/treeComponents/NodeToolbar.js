@@ -5,9 +5,7 @@ import { folderPlus } from "react-icons-kit/feather/folderPlus";
 import { filePlus } from "react-icons-kit/feather/filePlus";
 import React, { Fragment } from "react";
 import styled from "styled-components";
-
-const FILE_ID = "file";
-const FOLDER_ID = "folder";
+import { FOLDER_ID, CHILDREN_ID } from "./Constants"
 
 const Toolbar = styled.div`
   position: relative;
@@ -59,7 +57,7 @@ const NodeToolbar = ({ node, isFolder, isRoot, caption, addItem }) => (
           <Icon
             title="New Goal"
             icon={filePlus}
-            onClick={() => addItem(FILE_ID, node)}
+            onClick={() => addItem(CHILDREN_ID, node)}
           />
         )}
       </Fragment>
