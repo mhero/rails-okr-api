@@ -79,7 +79,9 @@ class App extends Component {
   };
 
   save = () => {
-    postOkrTree(this.state.tree, 1);
+    this.setState({
+      ...postOkrTree(this.state.tree, 1)
+    });
   };
 
   render() {
