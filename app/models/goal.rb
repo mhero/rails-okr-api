@@ -33,7 +33,7 @@ class Goal < ApplicationRecord
   private
 
   def ended_at_is_after_started_at?
-    return if ended_at.blank? || started_at.blank?
+    return false if ended_at.blank? || started_at.blank?
 
     errors.add(:ended_at, "can't be before to started_at") if ended_at < started_at
   end

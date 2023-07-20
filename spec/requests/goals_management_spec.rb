@@ -13,12 +13,12 @@ RSpec.describe "Goal management", type: :request do
     let!(:other_goals) { create_list(:goal, 2, owner: other_user) }
 
     it "returns status code 200" do
-      get "/goals", headers: headers
+      get("/goals", headers:)
       expect(response).to have_http_status(:ok)
     end
 
     it "returns the goals of the current user" do
-      get "/goals", headers: headers
+      get("/goals", headers:)
 
       json_response = JSON.parse(response.body)["data"]
 
@@ -34,13 +34,13 @@ RSpec.describe "Goal management", type: :request do
       let(:request_params) { { goal: { title: "Learn" } }.to_json }
 
       it "returns status code 201" do
-        post "/goals", params: request_params, headers: headers
+        post("/goals", params: request_params, headers:)
 
         expect(response).to have_http_status(:created)
       end
 
       it "creates a new goal with the current user as the owner" do
-        post "/goals", params: request_params, headers: headers
+        post("/goals", params: request_params, headers:)
 
         expect(Goal.last.owner).to eq current_user
       end
@@ -58,7 +58,7 @@ RSpec.describe "Goal management", type: :request do
         end
 
         it "creates a new goal with the user as owner" do
-          post "/goals", params: request_params, headers: headers
+          post("/goals", params: request_params, headers:)
 
           expect(Goal.last.owner).to eq goal_owner
         end
@@ -69,7 +69,7 @@ RSpec.describe "Goal management", type: :request do
       let(:request_params) { { goal: { title: "" } }.to_json }
 
       it "returns 404" do
-        post "/goals", params: request_params, headers: headers
+        post("/goals", params: request_params, headers:)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -91,12 +91,11 @@ RSpec.describe "Goal management", type: :request do
             { title: "Goal 3" }
           ],
           owner_id: current_user.id
-
         }.to_json
       end
 
       it "returns status code 201" do
-        post "/goals/batch", params: request_params, headers: headers
+        post("/goals/batch", params: request_params, headers:)
 
         aggregate_failures do
           expect(response).to have_http_status(:created)
@@ -119,7 +118,7 @@ RSpec.describe "Goal management", type: :request do
       end
 
       it "returns successfully created goals" do
-        post "/goals/batch", params: request_params, headers: headers
+        post("/goals/batch", params: request_params, headers:)
 
         expect(response).to have_http_status(:created)
       end
